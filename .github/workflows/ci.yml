@@ -1,0 +1,13 @@
+name: CI Workflow
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Print the current date and time
+              run: echo "The current date and time is $(date)."
