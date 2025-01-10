@@ -18,4 +18,4 @@ jobs:
               run: sudo docker rm -f test-api-container || true
 
             - name: Run Docker container
-              run: sudo docker run --name test-api-container ${{ secrets.DOCKER_USERNAME }}/test-api:latest
+              run: sudo docker run -d --name test-api-container ${{ secrets.DOCKER_USERNAME }}/test-api:latest
