@@ -1,0 +1,21 @@
+name: CD Workflow
+
+on:
+    workflow_run:
+        workflows: ["CI Workflow"]
+        types:
+            - completed
+
+jobs:
+    build:
+        runs-on: self-hosted
+
+        steps:
+            - name: Pull Docker image
+              run: sudo docker pull ${{ secrets.DOCKER_USERNAME }}/test-api:latest
+
+            - name: Delete existing Docker container
+              run: sudo docker rm -f test-api-container || true
+
+            - name: Run Docker container
+              run: sudo docker run --name test-api-container ${{ secrets.DOCKER_USERNAME }}/test-api:latest
